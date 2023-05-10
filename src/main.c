@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    
+    printf("\nBOM DIA SDKJAHDAS\n");
     return EXIT_SUCCESS;
 }
