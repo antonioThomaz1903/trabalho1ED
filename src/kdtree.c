@@ -4,14 +4,14 @@
 
 Kdtree* criarKD(void* item, double x, double y, Kdtree *pai){
     Kdtree* raiz = (Kdtree*)calloc(1, sizeof(Kdtree));
-    if(raiz != NULL){
-        raiz->item = item;
-        raiz->dir = NULL;
-        raiz->esq = NULL;
-        raiz->pai = pai;
-        raiz->x = x;
-        raiz->y = y;
-    }
+    
+    raiz->item = item;
+    raiz->dir = NULL;
+    raiz->esq = NULL;
+    raiz->pai = pai;
+    raiz->x = x;
+    raiz->y = y;
+    
     return raiz;
 }
 
@@ -46,11 +46,11 @@ Kdtree* inserir(Kdtree* raiz, void* item, double x, double y){
     return inserirAux(raiz, item, x, y, 0, NULL);
 }
 
-void destruirArvore(Kdtree *raiz){
-    if(raiz != NULL){
-        destruirArvore(raiz->dir);
-        destruirArvore(raiz->esq);
-        free(raiz);
+void destruirArvore(Kdtree **raiz){
+    if(*raiz != NULL){
+        destruirArvore(&(*raiz)->dir);
+        destruirArvore(&(*raiz)->esq);
+        free(&*raiz);
     }
 }
 
@@ -63,7 +63,9 @@ Kdtree* predecessorAux(Kdtree* filho_esquerdo){
 }
 
 Kdtree* predecessor(Kdtree *no){
-    return predecessorAux(no->esq);
+    if(no->esq != NULL)
+        return predecessorAux(no->esq);
+    return no->pai;
 }
 
 Kdtree* sucessorAux(Kdtree* filho_direito){
@@ -74,7 +76,9 @@ Kdtree* sucessorAux(Kdtree* filho_direito){
 }
 
 Kdtree* sucessor(Kdtree* no){
-    return sucessorAux(no->dir);
+    if(no->dir != NULL)
+        return sucessorAux(no->dir);
+    return no->pai;
 }
 
 
