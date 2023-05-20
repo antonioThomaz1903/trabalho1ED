@@ -50,6 +50,10 @@ void destruirArvore(Kdtree **raiz){
     if(*raiz != NULL){
         destruirArvore(&(*raiz)->dir);
         destruirArvore(&(*raiz)->esq);
+        (*raiz)->esq = NULL;
+        (*raiz)->dir = NULL;
+        (*raiz)->pai = NULL;
+        free(&(*raiz)->item);
         free(&*raiz);
     }
 }
