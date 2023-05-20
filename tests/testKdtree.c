@@ -3,6 +3,27 @@
 #include<string.h>
 #include"../src/kdtree.h"
 
+typedef struct _cidade{
+    char codigo_ibge[CIBGE+1];
+    char nome[MAX+1];
+    char codigo_uf[UF+1];
+    char capital[CAPITAL+1];
+    char regiao[MAX+1];
+    char siafi[SIAFI+1];
+    char ddd[DDD+1];
+    char fuso[MAX+1];
+} Cidade;
+
+typedef struct _fastfood{
+    char endereco[MAX+1];
+    char categoria[MAX+1];
+    char cidade[MAX+1];
+    char pais[3];
+    char nome[MAX+1];
+    char codigo_postal[CPOSTAL+1];
+    char provincia[3];
+} Fastfood;
+
 void imprimirArvore(Kdtree *raiz){
     if(raiz == NULL) return;
     printf("Nome da cidade: %s\n", (*(Cidade*)raiz->item).nome);
@@ -83,6 +104,8 @@ void testarKD(){
 
     arvore = destruirArvore(&arvore);
     free(arvore);
+
+    printf("\nFIM DO TESTE\n");
     
 }
 
