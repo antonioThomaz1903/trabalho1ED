@@ -46,7 +46,7 @@ Kdtree* inserir(Kdtree* raiz, void* item, double x, double y){
     return inserirAux(raiz, item, x, y, 0, NULL);
 }
 
-void destruirArvore(Kdtree **raiz){
+Kdtree* destruirArvore(Kdtree **raiz){
     if(*raiz != NULL){
         destruirArvore(&(*raiz)->dir);
         destruirArvore(&(*raiz)->esq);
@@ -56,6 +56,7 @@ void destruirArvore(Kdtree **raiz){
         free(&(*raiz)->item);
         free(&*raiz);
     }
+    return *raiz = NULL;
 }
 
 

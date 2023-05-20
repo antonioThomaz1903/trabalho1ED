@@ -39,7 +39,7 @@ typedef struct _fastfood{
 } Fastfood;
 
 Kdtree* inserir(Kdtree* raiz, void* item, double x, double y);
-void destruirArvore(Kdtree **raiz);
+Kdtree* destruirArvore(Kdtree **raiz);
 Kdtree* predecessor(Kdtree *no);
 Kdtree* sucessor(Kdtree* no);
 

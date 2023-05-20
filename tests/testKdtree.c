@@ -21,6 +21,7 @@ void testarKD(){
         printf("2- Predecessor\n");
         printf("3- Sucessor\n");
         printf("4- Imprimir arvore\n");
+        printf("5- Destruir arvore\n");
         printf("0- Sair\nOpcao: ");
         scanf("%d", &op);
 
@@ -47,7 +48,7 @@ void testarKD(){
             Kdtree *pred = predecessor(arvore);
             if(pred != NULL){
                 printf("\nPredecessor da raiz: %s\n", ((Cidade*)pred->item)->nome);
-                printf("Latitude, Longitude = (%.1lf, %,1lf)", pred->x, pred->y);
+                printf("Latitude, Longitude = (%.1lf, %.1lf)", pred->x, pred->y);
             }
             else{
                 printf("\nNao ha predecessor\n");
@@ -70,12 +71,18 @@ void testarKD(){
             imprimirArvore(arvore);
         }
 
-        else if(op < 0 || op > 4){
+        else if(op == 5){
+            arvore = destruirArvore(&arvore);
+            printf("\nARVORE DESTRUIDA\n");
+        }
+
+        else if(op < 0 || op > 5){
             printf("\nOPCAO INVALIDA");
         }
     }
 
-    destruirArvore(&arvore);
+    arvore = destruirArvore(&arvore);
+    free(arvore);
     
 }
 
