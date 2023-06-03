@@ -1,49 +1,37 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 #include"kdtree.h"
 
-Kdtree* criarKD(void* item, double x, double y, Kdtree *pai){
+Kdtree* criarKD(void* item, Kdtree *pai, int nivel,  int (*compara)(const void *a, const void *b, int nivel)){
     Kdtree* raiz = (Kdtree*)calloc(1, sizeof(Kdtree));
     
     raiz->item = item;
     raiz->dir = NULL;
     raiz->esq = NULL;
     raiz->pai = pai;
-    raiz->x = x;
-    raiz->y = y;
-    
+    raiz->nivel = nivel;
+    raiz->compara = compara;
     return raiz;
 }
 
-Kdtree* inserirAux(Kdtree* raiz, void* item, double x, double y, int nivel, Kdtree *pai){
+Kdtree* inserirAux(Kdtree* raiz, void* item, int nivel, Kdtree *pai, int (*compara)(const void *a, const void *b, int nivel)){
 
-    if(raiz == NULL) return criarKD(item, x, y, pai);
-
-    nivel = nivel % 2;
+    if(raiz == NULL) return criarKD(item, pai, nivel, compara);
     Kdtree *atual = raiz;
 
-    if(nivel == 0){
-        if(x < raiz->x){
-            raiz->esq = inserirAux(raiz->esq, item, x, y, nivel+1, atual);
-        }
-        else{
-            raiz->dir = inserirAux(raiz->dir, item, x, y, nivel+1, atual);
-        }
+    if(raiz->compara(raiz->item, item, nivel)){
+        raiz->esq = inserirAux(raiz->esq, item, nivel+1, atual, compara);
     }
     else{
-        if(y < raiz->y){
-            raiz->esq = inserirAux(raiz->esq, item, x, y, nivel+1, atual);
-        }
-        else{
-            raiz->dir = inserirAux(raiz->dir, item, x, y, nivel+1, atual);
-        }
+        raiz->dir = inserirAux(raiz->dir, item, nivel+1, atual, compara);
     }
 
     return raiz;
 }
 
-Kdtree* inserir(Kdtree* raiz, void* item, double x, double y){
-    return inserirAux(raiz, item, x, y, 0, NULL);
+Kdtree* inserir(Kdtree* raiz, void* item, int (*compara)(const void *a, const void *b, int nivel)){
+    return inserirAux(raiz, item, 0, NULL, compara);
 }
 
 Kdtree* destruirArvore(Kdtree **raiz){
@@ -84,6 +72,30 @@ Kdtree* sucessor(Kdtree* no){
     if(no->dir != NULL)
         return sucessorAux(no->dir);
     return no->pai;
+}
+
+Kdtree* maisProximo(Kdtree *no, double (*calculaDistancia)(const void *a, const void *b)){
+    Kdtree *suc, *pred;
+    suc = sucessor(no);
+    pred = predecessor(no);
+
+    if(suc == NULL && pred == NULL){
+        return NULL;
+    }
+    else if(suc == NULL){
+        return pred;
+    }
+    else if(pred == NULL){
+        return suc;
+    }
+
+    if(calculaDistancia(no->item, suc->item) <= calculaDistancia(no->item, pred->item)){
+        return suc;
+    }
+    else{
+        return pred;
+    }
+
 }
 
 
