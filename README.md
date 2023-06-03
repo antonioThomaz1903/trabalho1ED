@@ -7,12 +7,10 @@ Discente: Edson Takashi Matsubara
 COMPILAR E RODAR:
 
 ```
+aclocal
+autoreconf --install
+./configure
 make
-make linux
-make debug
+make check
 ```
 
-
-Video explicando e demonstrando o programa:
-
-https://youtu.be/ULe-Hf3pNXY
