@@ -17,7 +17,7 @@ jobs:
     - name: aclocal
       run: aclocal
     
-    -name: autoreconf
+    - name: autoreconf
       run: autoreconf --install
     
     - name: configure
