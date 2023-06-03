@@ -1,4 +1,4 @@
-TESTS = testkdtree 
+TESTS = testKdtree 
 check_PROGRAMS = testKdtree
 
 
