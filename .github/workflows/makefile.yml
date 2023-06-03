@@ -13,7 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
+    
+    - name: aclocal
+      run: aclocal
+    
+    -name: autoreconf
+      run: autoreconf --install
+    
     - name: configure
       run: ./configure
 
