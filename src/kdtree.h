@@ -16,5 +16,7 @@ Kdtree* destruirArvore(Kdtree **raiz);
 Kdtree* predecessor(Kdtree *no);
 Kdtree* sucessor(Kdtree* no);
 Kdtree* maisProximo(Kdtree *no, double (*calculaDistancia)(const void *a, const void *b));
+Kdtree** maisProximos(Kdtree *no, int k);
+Kdtree* buscarNoNome(Kdtree* arvore, char *nome, int (*igualaNo)(const void *a, const char *nome));
 
 #endif

@@ -45,8 +45,8 @@ Kdtree *lerFastfoods(char *nomeArquivo){
 
     while(!feof(arq)){
         fastAux = (Fastfood*)calloc(1, sizeof(Fastfood));
-
         fscanf(arq, " %[^,],", fastAux->id);
+        fscanf(arq, " %[^,],", fastAux->endereco);
         fscanf(arq, " %[^,],", fastAux->cidade);
         fscanf(arq, " %[^,],", fastAux->pais);
         fscanf(arq, " %lf,", &fastAux->lat);
@@ -55,8 +55,7 @@ Kdtree *lerFastfoods(char *nomeArquivo){
         fscanf(arq, " %[^,],", fastAux->codigo_postal);
         fscanf(arq, " %[^,],", fastAux->provincia);
         fscanf(arq, " %[^\n]\n", fastAux->sites);
-
-        arvore = inserir(arvore, fastAux, comparaCidade);
-
+        arvore = inserir(arvore, fastAux, comparaFastfood);
     }
+    return arvore;
 }

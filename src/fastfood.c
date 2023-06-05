@@ -24,7 +24,7 @@ double comparaFastfood(const void *a, const void *b, int nivel){
     }
 }
 
-double calcularDistanciaFastfood(const void *a, const void *b){
+double calculaDistanciaFastfood(const void *a, const void *b){
     Fastfood *fA = (Fastfood*)a;
     Fastfood *fB = (Fastfood*)b;
     double deltaLat, deltaLong, distancia, aux;
@@ -33,5 +33,12 @@ double calcularDistanciaFastfood(const void *a, const void *b){
     aux = (deltaLat * deltaLat) + (deltaLong * deltaLong);
     distancia = sqrt(aux);
     return distancia;
+}
+
+int igualaFastfood(const void *a, const char *nome){
+    if(strcmp(((Fastfood*)a)->nome, nome) == 0){
+        return 1;
+    }
+    return 0;
 }
 

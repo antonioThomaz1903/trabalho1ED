@@ -30,13 +30,26 @@ void testarKD(){
     assert(((Cidade*)arvore->dir->item)->lon == 15);
 
     Cidade aux3;
-    aux3.lat = 5;
-    aux3.lon = 5;
+    aux3.lat = 2;
+    aux3.lon = 2;
     arvore = inserir(arvore, &aux3, comparaCidade);
 
     assert(arvore->esq->nivel == 1);
-    assert(((Cidade*)arvore->esq->item)->lat == 5);
-    assert(((Cidade*)arvore->esq->item)->lon == 5);
+    assert(((Cidade*)arvore->esq->item)->lat == 2);
+    assert(((Cidade*)arvore->esq->item)->lon == 2);
+
+    Kdtree *suc = sucessor(arvore);
+    assert(((Cidade*)suc->item)->lat == 15);
+
+    Kdtree *pred = predecessor(arvore);
+    assert(((Cidade*)pred->item)->lat == 2);
+
+    Kdtree *maisP = maisProximo(arvore, calcularDistanciaCidade);
+    assert(((Cidade*)maisP->item)->lat == 15);
+
+    Kdtree **maisPs = maisProximos(arvore, 2);
+    assert(((Cidade*)maisPs[0]->item)->lat == 15);
+    assert(((Cidade*)maisPs[1]->item)->lat == 2);
 }
 
 int main(void){

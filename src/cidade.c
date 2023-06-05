@@ -35,3 +35,11 @@ double calcularDistanciaCidade(const void *a, const void *b){
     distancia = sqrt(aux);
     return distancia;
 }
+
+int igualaCidade(const void *a, const char* nome){
+    Cidade *aux = (Cidade*)a;
+    if(strcmp(aux->nome, nome)==0){
+        return 1;
+    }
+    return 0;
+}

@@ -22,6 +22,6 @@ typedef struct _cidade{
 
 int comparaCidade(const void *a, const void *b, int nivel);
 double calcularDistanciaCidade(const void *a, const void *b);
-
+int igualaCidade(const void *a, const char* nome);
 
 #endif
