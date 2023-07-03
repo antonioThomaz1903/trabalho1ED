@@ -1,4 +1,4 @@
-# Trabalho 1 - Antonio Thomaz - 2023
+# Trabalho 1 / 2 - Antonio Thomaz - 2023
 
 Disciplina: Estrutura de Dados
 
